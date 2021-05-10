@@ -17,7 +17,7 @@ class ExpensesApp extends StatelessWidget {
           backgroundColor: Colors.blueAccent,
         ),
         fontFamily: 'Quicksand',
-        textTheme: ThemeData.dark().textTheme.copyWith(
+        textTheme: ThemeData.light().textTheme.copyWith(
               headline6: TextStyle(
                 fontFamily: 'OpenSans',
                 fontSize: 18,
@@ -44,19 +44,19 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  final _transactions = [
-    Transaction(
-      id: 't1',
-      title: 'Novo Tênis de Corrida',
-      value: 699.99,
-      date: DateTime.now(),
-    ),
-    Transaction(
-      id: 't12',
-      title: 'Conta de Luz',
-      value: 83.95,
-      date: DateTime.now(),
-    ),
+  final List<Transaction> _transactions = [
+    // Transaction(
+    //   id: 't1',
+    //   title: 'Novo Tênis de Corrida',
+    //   value: 699.99,
+    //   date: DateTime.now(),
+    // ),
+    // Transaction(
+    //   id: 't12',
+    //   title: 'Conta de Luz',
+    //   value: 83.95,
+    //   date: DateTime.now(),
+    // ),
   ];
 
   _addTransaction(String title, double value) {
