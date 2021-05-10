@@ -20,7 +20,37 @@ class _TransactioUserState extends State<TransactioUser> {
     ),
     Transaction(
       id: 't12',
-      title: 'Conta de Luz',
+      title: 'Conta de Luz 01',
+      value: 83.95,
+      date: DateTime.now(),
+    ),
+    Transaction(
+      id: 't12',
+      title: 'Conta de Luz 02',
+      value: 83.95,
+      date: DateTime.now(),
+    ),
+    Transaction(
+      id: 't12',
+      title: 'Conta de Luz 03',
+      value: 83.95,
+      date: DateTime.now(),
+    ),
+    Transaction(
+      id: 't12',
+      title: 'Conta de Luz 04',
+      value: 83.95,
+      date: DateTime.now(),
+    ),
+    Transaction(
+      id: 't12',
+      title: 'Conta de Luz 05',
+      value: 83.95,
+      date: DateTime.now(),
+    ),
+    Transaction(
+      id: 't12',
+      title: 'Conta de Luz 06',
       value: 83.95,
       date: DateTime.now(),
     ),
@@ -43,8 +73,8 @@ class _TransactioUserState extends State<TransactioUser> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        TransactionList(_transactions),
         TransactionForm(_addTransaction),
+        TransactionList(_transactions),
       ],
     );
   }
