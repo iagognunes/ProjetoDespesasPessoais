@@ -27,41 +27,43 @@ class _TransactionFormState extends State<TransactionForm> {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      elevation: 5,
-      child: Padding(
-        padding: const EdgeInsets.all(10),
-        child: Column(
-          children: [
-            TextField(
-              controller: titleController,
-              onSubmitted: (_) => _submitForm(),
-              decoration: InputDecoration(
-                labelText: 'Título',
-              ),
-            ),
-            TextField(
-              keyboardType: TextInputType.numberWithOptions(decimal: true),
-              controller: valueController,
-              onSubmitted: (_) => _submitForm(),
-              decoration: InputDecoration(
-                labelText: 'Valor (R\$)',
-              ),
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                TextButton(
-                  child: Text('Nova Transação'),
-                  style: TextButton.styleFrom(
-                    primary: Colors.purple,
-                    backgroundColor: Colors.white,
-                  ),
-                  onPressed: _submitForm,
+    return SingleChildScrollView(
+      child: Card(
+        elevation: 5,
+        child: Padding(
+          padding: const EdgeInsets.all(10),
+          child: Column(
+            children: [
+              TextField(
+                controller: titleController,
+                onSubmitted: (_) => _submitForm(),
+                decoration: InputDecoration(
+                  labelText: 'Título',
                 ),
-              ],
-            ),
-          ],
+              ),
+              TextField(
+                keyboardType: TextInputType.numberWithOptions(decimal: true),
+                controller: valueController,
+                onSubmitted: (_) => _submitForm(),
+                decoration: InputDecoration(
+                  labelText: 'Valor (R\$)',
+                ),
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  TextButton(
+                    child: Text('Nova Transação'),
+                    style: TextButton.styleFrom(
+                      primary: Colors.purple,
+                      backgroundColor: Colors.white,
+                    ),
+                    onPressed: _submitForm,
+                  ),
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );
