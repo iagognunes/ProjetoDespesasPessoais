@@ -26,19 +26,26 @@ class ExpensesApp extends StatelessWidget {
               ),
             ),
         appBarTheme: AppBarTheme(
-          toolbarTextStyle: ThemeData.dark().textTheme.copyWith(
+          toolbarTextStyle: ThemeData.dark()
+              .textTheme
+              .copyWith(
                 headline6: TextStyle(
                   fontFamily: 'OpenSans',
                   fontSize: 20,
                   fontWeight: FontWeight.bold,
                 ),
-              ).bodyText2, titleTextStyle: ThemeData.dark().textTheme.copyWith(
+              )
+              .bodyText2,
+          titleTextStyle: ThemeData.dark()
+              .textTheme
+              .copyWith(
                 headline6: TextStyle(
                   fontFamily: 'OpenSans',
                   fontSize: 20,
                   fontWeight: FontWeight.bold,
                 ),
-              ).headline6,
+              )
+              .headline6,
         ),
       ),
     );
@@ -51,20 +58,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  final List<Transaction> _transactions = [
-    // Transaction(
-    //   id: 't1',
-    //   title: 'Novo Tênis de Corrida',
-    //   value: 699.99,
-    //   date: DateTime.now().subtract(Duration(days: 2)),
-    // ),
-    // Transaction(
-    //   id: 't2',
-    //   title: 'Conta de Luz',
-    //   value: 83.95,
-    //   date: DateTime.now().subtract(Duration(days: 3)),
-    // ),
-  ];
+  final List<Transaction> _transactions = [];
 
   _addTransaction(String title, double value, DateTime date) {
     final newTransaction = Transaction(
@@ -79,6 +73,12 @@ class _MyHomePageState extends State<MyHomePage> {
     });
 
     Navigator.of(context).pop();
+  }
+
+  _deleteTransaction(String id) {
+    setState(() {
+      _transactions.removeWhere((tr) => tr.id == id);
+    });
   }
 
   _openTransactionFormModal(BuildContext context) {
@@ -110,8 +110,11 @@ class _MyHomePageState extends State<MyHomePage> {
           children: [
             Container(
               width: double.infinity,
-              child: Chart(recentTransaction: _transactions,),            ),
-            TransactionList(_transactions),
+              child: Chart(
+                recentTransaction: _transactions,
+              ),
+            ),
+            TransactionList(_transactions, _deleteTransaction),
           ],
         ),
       ),
