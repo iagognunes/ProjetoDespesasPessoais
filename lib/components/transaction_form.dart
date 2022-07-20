@@ -49,12 +49,7 @@ class _TransactionFormState extends State<TransactionForm> {
       child: Card(
         elevation: 5,
         child: Padding(
-          padding: EdgeInsets.only(
-            top: 10,
-            left: 10,
-            right: 10,
-            bottom: 10 + MediaQuery.of(context).viewInsets.bottom,
-          ),
+          padding: MediaQuery.of(context).viewInsets,
           child: Column(
             children: [
               TextField(
@@ -78,13 +73,13 @@ class _TransactionFormState extends State<TransactionForm> {
                 child: Row(
                   children: [
                     _selectedDate == null
-                        ? Text('Nenhuma data selecionada!')
+                        ? const Text('Nenhuma data selecionada!')
                         : Expanded(
                             child: Text(
                                 "Data Selecionada: ${DateFormat('dd/MM/yy').format(_selectedDate)}")),
                     TextButton(
                       onPressed: _showDatePicker,
-                      child: Text(
+                      child: const Text(
                         'Selecionar Data',
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
@@ -98,7 +93,7 @@ class _TransactionFormState extends State<TransactionForm> {
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   ElevatedButton(
-                    child: Text('Nova Transação'),
+                    child: const Text('Nova Transação'),
                     style: TextButton.styleFrom(
                       primary: Colors.white,
                       backgroundColor: Colors.purple,

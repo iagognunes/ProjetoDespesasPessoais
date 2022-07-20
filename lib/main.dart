@@ -11,6 +11,7 @@ class ExpensesApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       home: MyHomePage(),
       theme: ThemeData(
         primarySwatch: Colors.purple,
@@ -57,7 +58,7 @@ class MyHomePage extends StatefulWidget {
   _MyHomePageState createState() => _MyHomePageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _MyHomePageState extends State<MyHomePage> with WidgetsBindingObserver {
   final List<Transaction> _transactions = [];
   bool showChart = false;
 
@@ -84,6 +85,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   _openTransactionFormModal(BuildContext context) {
     showModalBottomSheet(
+      isScrollControlled: true,
       context: context,
       builder: (_) {
         return TransactionForm(_addTransaction);
@@ -93,8 +95,8 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    bool isLandscape =
-        MediaQuery.of(context).orientation == Orientation.landscape;
+    final mediaQuery = MediaQuery.of(context);
+    bool isLandscape = mediaQuery.orientation == Orientation.landscape;
 
     final appBar = AppBar(
       title: Center(
@@ -117,30 +119,32 @@ class _MyHomePageState extends State<MyHomePage> {
       ],
     );
 
-    final availableHeight = MediaQuery.of(context).size.height -
+    final availableHeight = mediaQuery.size.height -
         appBar.preferredSize.height -
-        MediaQuery.of(context).padding.top;
+        mediaQuery.padding.top;
 
     return Scaffold(
       appBar: appBar,
-      body: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            if (showChart || !isLandscape)
-              Container(
-                height: availableHeight * (isLandscape ? 0.7 : 0.3),
-                width: double.infinity,
-                child: Chart(
-                  recentTransaction: _transactions,
+      body: SafeArea(
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              if (showChart || !isLandscape)
+                Container(
+                  height: availableHeight * (isLandscape ? 0.8 : 0.3),
+                  width: double.infinity,
+                  child: Chart(
+                    recentTransaction: _transactions,
+                  ),
                 ),
-              ),
-            if (!showChart || !isLandscape)
-              SizedBox(
-                height: availableHeight * 0.7,
-                child: TransactionList(_transactions, _deleteTransaction),
-              ),
-          ],
+              if (!showChart || !isLandscape)
+                SizedBox(
+                  height: availableHeight * (isLandscape ? 1 : 0.7),
+                  child: TransactionList(_transactions, _deleteTransaction),
+                ),
+            ],
+          ),
         ),
       ),
       floatingActionButton: FloatingActionButton(
